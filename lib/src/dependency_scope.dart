@@ -15,7 +15,7 @@ abstract base class DependencyScope {
   /// ```dart
   /// final myDependency = await dependencyScope.create(() => MyDependency());
   /// ```
-  FutureOr<T> create<T>(T Function() init) async {
+  Future<T> create<T>(T Function() init) async {
     // Start a timer to measure the initialization duration.
     final timer = Stopwatch()..start();
     try {
@@ -32,4 +32,10 @@ abstract base class DependencyScope {
       logger.info("Dependency initialized $T in ${timer.elapsedMilliseconds} ms");
     }
   }
+
+  /// Abstract method for initializing dependencies.
+  ///
+  /// This method should be implemented by subclasses to perform any necessary
+  /// initialization logic for dependencies.
+  Future<void> initialization();
 }
