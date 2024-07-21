@@ -11,16 +11,28 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-This package was created to facilitate the use of Dependency Injection in a Flutter project
+# Dependency Scope
+
+Dependency Scope is a Flutter package designed to facilitate the use of Dependency Injection (DI) in Flutter projects.
+This package provides a straightforward way to manage dependencies, improving code modularity and testability.
 
 ## Features
 
-List what your package can do. Maybe include images, gifs, or videos.
+- Simplifies dependency injection setup in Flutter applications.
+- Enhances code maintainability and readability.
+- Supports easy and efficient management of app-wide dependencies.
+
+## Installation
+- Add the following to your pubspec.yaml file:
+```yaml
+dependencies:
+  dependency_scope: ^1.1.0
+```
 
 ## Getting started
-
-List prerequisites and provide or point to information on how to
-start using the package.
+- Setup: Initialize the DependencyScope in your main app file.
+- Register Dependencies: Register your dependencies in the DependencyScope.
+- Inject Dependencies: Use the provided methods to inject dependencies where needed.
 
 ## Usage
 
@@ -28,11 +40,34 @@ Include short and useful examples for package users. Add longer examples
 to `/example` folder. 
 
 ```dart
-const like = 'sample';
+final class AppDependency extends DependencyScope {
+  late final String title;
+
+  @override
+  Future<void> initialization() async {
+    title = await create(() => 'Flutter DI');
+  }
+}
 ```
+And
+```dart
+class App extends StatelessWidget {
+  final AppDependency appDependency;
 
-## Additional information
+  const App({super.key, required this.appDependency});
 
-Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+  @override
+  Widget build(BuildContext context) {
+    return DependencyProvider<AppDependency>(
+      dependency: appDependency,
+      child: const MaterialApp(
+        home: MyHomePage(),
+      ),
+    );
+  }
+}
+```
+After this you can use DI with context extension
+```dart
+final appDependency = context.get<AppDependency>();
+```
