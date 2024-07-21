@@ -12,9 +12,9 @@ extension GetDependencyProviderExtension on BuildContext {
   /// ```dart
   /// final myDependency = context.get<MyDependency>().dependency;
   /// ```
-  DependencyProvider<T> get<T>() {
+  T get<T>() {
     // Use DependencyProvider.of to find the nearest DependencyProvider of type T
-    final dep = DependencyProvider.of<T>(this);
+    final dep = DependencyProvider.of<T>(this).dependency;
     return dep;
   }
 }
