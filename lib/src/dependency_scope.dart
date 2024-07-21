@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dependency_scope/src/logger.dart';
 
 /// Abstract base class for managing dependency creation and initialization.
@@ -13,7 +15,7 @@ abstract base class DependencyScope {
   /// ```dart
   /// final myDependency = await dependencyScope.create(() => MyDependency());
   /// ```
-  Future<T> create<T>(T Function() init) async {
+  FutureOr<T> create<T>(T Function() init) async {
     // Start a timer to measure the initialization duration.
     final timer = Stopwatch()..start();
     try {
