@@ -23,13 +23,15 @@ abstract base class DependencyScope {
       return init();
     } catch (error, stackTrace) {
       // Log an error message if initialization fails.
-      logger.error('Error initializing dependency $T:', error: error, stackTrace: stackTrace);
+      logger.error('Error initializing dependency $T:',
+          error: error, stackTrace: stackTrace);
       // Rethrow the caught error.
       rethrow;
     } finally {
       // Stop the timer and log the elapsed time for initialization.
       timer.stop();
-      logger.info("Dependency initialized $T in ${timer.elapsedMilliseconds} ms");
+      logger
+          .info("Dependency initialized $T in ${timer.elapsedMilliseconds} ms");
     }
   }
 
