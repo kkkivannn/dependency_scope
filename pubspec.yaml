@@ -1,6 +1,6 @@
 name: dependency_scope
 description: This package was created to facilitate the use of Dependency Injection in a Flutter project
-version: 1.0.1
+version: 1.1.0
 repository: https://github.com/kkkivannn/dependency_scope
 
 environment:
