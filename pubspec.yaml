@@ -1,19 +1,17 @@
 name: dependency_scope
-description: A starting point for Dart libraries or applications.
+description: This package was created to facilitate the use of Dependency Injection in a Flutter project
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/kkkivannn/dependency_scope
 
 environment:
   sdk: ^3.4.0
 
-# Add regular dependencies here.
 dependencies:
   flutter:
     sdk: flutter
   flutter_test:
     sdk: flutter
   logging: ^1.2.0
-  # path: ^1.8.0
 
 dev_dependencies:
   lints: ^3.0.0
