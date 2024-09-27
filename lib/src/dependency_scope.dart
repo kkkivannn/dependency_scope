@@ -15,23 +15,25 @@ abstract base class DependencyScope {
   /// ```dart
   /// final myDependency = await dependencyScope.create(() => MyDependency());
   /// ```
-  Future<T> create<T>(T Function() init) async {
+  final List<dynamic> _dependencies = [];
+
+  Future<T> create<T>(FutureOr<T> Function() init) async {
     // Start a timer to measure the initialization duration.
     final timer = Stopwatch()..start();
     try {
       // Attempt to initialize the dependency.
-      return init();
+      final dep = init();
+      _dependencies.add(dep);
+      return dep;
     } catch (error, stackTrace) {
       // Log an error message if initialization fails.
-      logger.error('Error initializing dependency $T:',
-          error: error, stackTrace: stackTrace);
+      logger.error('Error initializing dependency $T:', error: error, stackTrace: stackTrace);
       // Rethrow the caught error.
       rethrow;
     } finally {
       // Stop the timer and log the elapsed time for initialization.
       timer.stop();
-      logger
-          .info("Dependency initialized $T in ${timer.elapsedMilliseconds} ms");
+      logger.info("Dependency initialized $T in ${timer.elapsedMilliseconds} ms. Count: ${_dependencies.length}");
     }
   }
 
